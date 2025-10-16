@@ -1,9 +1,14 @@
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { SplitText } from 'gsap/all'
-import React from 'react'
+import React, { useRef } from 'react'
+import { useMediaQuery } from 'react-responsive' 
 
 const Hero = () => {
+
+    const videoRef = useRef();
+
+    const isMobil = useMediaQuery({ maxWidth: 767 });
 
     useGSAP(() => {
 
@@ -47,6 +52,36 @@ const Hero = () => {
         })
         .to('.right-leaf', { y: 200,}, 0) // 200 makes the leave go up as scrooling and 0 keeps it in place
         .to('.left-leaf', { y: -200,}, 0) // -200 makes the leave go down as scrooling and 0 keeps it in place
+
+        const startValue = isMobil ? 'top 50%' : 'center 60%';
+        const endValue = isMobil ? '120% top' : 'bottom top';
+
+        const tl = gsap.timeline({
+
+            scrollTrigger: {
+
+                trigger: 'video',
+                start: startValue,
+                end: endValue,
+                scrub: true,
+                pin: true, //keeps the video stock on screen as you scrrol like fixed style
+
+
+            }
+
+        })
+
+        videoRef.current.onloadedmetadata = () => {
+
+            tl.to(videoRef.current, {
+
+                currentTime: videoRef.current.duration,
+
+                
+            })
+
+        }
+        
             
 
     }, [])
@@ -90,6 +125,19 @@ const Hero = () => {
             </div>
 
         </section>
+
+        <div className="video absolute inset-0">
+
+            <video 
+                ref={videoRef}
+                src="/videos/output.mp4"
+                muted
+                playsInline //hidding eveythink a video has like play, puse, sounds levels, etc...
+                preload='auto' //load auto when user enters the page
+            />
+
+
+        </div>
 
     </>
 
