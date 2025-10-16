@@ -37,10 +37,12 @@ body {
 }
 
 @utility text-gradient {
+
     background: linear-gradient(to bottom, #ffffff, #898989);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    
 }
 
 @utility radial-gradient {
