@@ -54,11 +54,11 @@ body {
     );
 }
 
-@utility masked-img {
-    mask-image: url("/images/mask-img.png");
-    mask-repeat: no-repeat;
-    mask-position: center;
-    mask-size: 50%;
+@utility masked-img { /* made the img have a mask in css you can chose any img and add another img to be ots cover while the img is the mask*/
+    mask-image: url("/images/mask-img.png"); /*this is the img of the shape the mask is gonna be*/
+    mask-repeat: no-repeat;  /*this well centriaze the img*/
+    mask-position: center; /*this well make sure the img looks good enought*/
+    mask-size: 50%; /*it well give it a size relited to itsd partnets*/
 }
 
 @layer components {
